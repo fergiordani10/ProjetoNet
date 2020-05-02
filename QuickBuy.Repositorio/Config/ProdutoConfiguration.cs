@@ -1,0 +1,30 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using QuickBuy.Dominio.Entidades;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace QuickBuy.Repositorio.Config
+{
+    public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
+    {
+        public void Configure(EntityTypeBuilder<Produto> builder)
+        {
+            builder.HasKey(pro => pro.Id);
+            //builder utiliza o padrao Fluent
+            builder
+                .Property(pro => pro.Descricao)
+                .IsRequired()
+                .HasMaxLength(400);
+            builder
+               .Property(pro =>pro.Nome )
+               .IsRequired()
+               .HasMaxLength(50);
+            builder
+               .Property(pro => pro.Preco)
+               .IsRequired();
+              
+        }
+    }
+}
